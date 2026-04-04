@@ -32,6 +32,11 @@ body {
     border: none;
 }
 
+.calculator-button:hover{
+    color: #232323;
+    background-color: white;
+}
+
 .operation-button{
     background-color: #fe9808;
 }
