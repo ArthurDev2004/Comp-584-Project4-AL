@@ -75,11 +75,31 @@ body {
     color: white;
     text-align: right;
     letter-spacing: 0.25rem;
-    font-size: 3rem;
+    font-size: 4rem;
     overflow-x: auto;
+    display: flex; /*Will allow for easily making the text in the center*/
+    justify-content: right;
+    align-items: center;
+    white-space: nowrap; /*Will ensure the element can overflow so the scrolling appears*/
 }
 
+/*Gets rid of noticable scroll bar horizontally whenever on chrome*/
 .calculator-numbers::-webkit-scrollbar{
     display: none;
 }
 
+#zero-button{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    height: 75px;
+    border-radius: 300px;
+}
+
+
+.clear-button{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    width: 100%;
+    border-radius: 300px;
+}

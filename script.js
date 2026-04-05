@@ -87,7 +87,7 @@ document.addEventListener('click', async (e) => {
             // will convert to default showing whenever the calculator has been cleared with nothing left 
             if (calculatorView.innerText.length === 0){
                 calculatorView.innerText = "0";
-                calculatorView.currentCalculation = "0";
+                calculatorView.dataset.currentCalculation = "0";
 
                 // keep the button clicked state at 0 because since there is no number it is like starting from square one again
 
@@ -111,6 +111,8 @@ document.addEventListener('click', async (e) => {
             calculatorView.dataset.currentCalculation = "0"; 
 
         }
+
+    }else if (buttonClicked.classList.contains('equal-button')){ // whenver the user puts in there input to get the result calculated from the expresion they had 
 
     }
 
