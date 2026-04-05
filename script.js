@@ -3,23 +3,25 @@ document.addEventListener('click', async (e) => {
 
     let buttonClicked = e.target; // button which causes the click event to occur   
     // determines wheter button is a number one or an operation one 
-    debugger;
+
     if (buttonClicked.classList.contains('number-button') || buttonClicked.classList.contains('operation-button')){
 
         let calculatorView = document.querySelector('.calculator-numbers'); // gets the element that has the calculator numbers
         let clearButton = document.querySelector('.clear-button');
 
-        if (calculatorView.dataset.currentCalculation === "0") // 0 indicates that there is no current calculation happening so can get rid of the 0
+        if (calculatorView.dataset.currentCalculation === "0" && buttonClicked.classList.contains('operation-button')) // will keep 0 as the value and just add to that the operation 
         {
+            calculatorView.dataset.currentCalculation = "1"; 
+        }
+        else if (calculatorView.dataset.currentCalculation === "0"){ // 0 indicates that there is no current calculation happening so can get rid of the 0
             calculatorView.innerText = ""; // gets rid of the 0 which is there initially
             calculatorView.dataset.currentCalculation = "1"; // assign value 1 to indicate there is a current calculation happening
         }
 
+
         // check to see if the value of the button clicked is the same operation or just an operation in general so it does not add many operations together without a number in between them
-        debugger;
         if (buttonClicked.classList.contains('operation-button')){
 
-            console.log(calculatorView.innerText[calculatorView.innerText.length - 1]); 
 
             // check to see if there is already an operation at the end of the calculator view 
             if (calculatorView.innerText[calculatorView.innerText.length - 1] === '×' || calculatorView.innerText[calculatorView.innerText.length - 1] === '÷' || calculatorView.innerText[calculatorView.innerText.length - 1] === '+'|| calculatorView.innerText[calculatorView.innerText.length - 1] === '−'){
