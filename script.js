@@ -15,8 +15,30 @@ document.addEventListener('click', async (e) => {
             calculatorView.dataset.currentCalculation = "1"; // assign value 1 to indicate there is a current calculation happening
         }
 
+        // check to see if the value of the button clicked is the same operation or just an operation in general so it does not add many operations together without a number in between them
+        debugger;
+        if (buttonClicked.classList.contains('operation-button')){
 
-        calculatorView.innerText += buttonClicked.dataset.value; // appends the value to the text present in the view of the numbers in the calculator
+            console.log(calculatorView.innerText[calculatorView.innerText.length - 1]); 
+
+            // check to see if there is already an operation at the end of the calculator view 
+            if (calculatorView.innerText[calculatorView.innerText.length - 1] === '×' || calculatorView.innerText[calculatorView.innerText.length - 1] === '÷' || calculatorView.innerText[calculatorView.innerText.length - 1] === '+'|| calculatorView.innerText[calculatorView.innerText.length - 1] === '−'){
+
+                // if it is a different operation than the one currently present
+                if (buttonClicked.dataset.value !== calculatorView.innerText[calculatorView.innerText.length - 1]) {
+                    
+                    calculatorView.innerText = calculatorView.innerText.slice(0,-1) + buttonClicked.dataset.value // assign this operation to be the operation (strings are immutable in js)
+                }
+            }
+            else{
+                calculatorView.innerText += buttonClicked.dataset.value; // appends the value to the text present in the view of the numbers in the calculator
+            }
+
+
+        }
+        else {
+            calculatorView.innerText += buttonClicked.dataset.value; // appends the value to the text present in the view of the numbers in the calculator
+        }
 
         // should change the button with AC to C (mimic the way the iPhone calc is )
 
@@ -85,6 +107,8 @@ document.addEventListener('click', async (e) => {
             calculatorView.innerText = "0";
 
             buttonClicked.dataset.clicked = "0"; // put the hidden state of if the value has been used back to default 
+
+            calculatorView.dataset.currentCalculation = "0"; 
 
         }
 

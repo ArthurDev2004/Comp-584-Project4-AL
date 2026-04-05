@@ -74,7 +74,7 @@ body {
     height: 100px;
     color: white;
     text-align: right;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.25rem;
     font-size: 3rem;
     overflow-x: auto;
 }
