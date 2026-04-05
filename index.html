@@ -14,14 +14,14 @@
   <body>
     <div class="wrapper">
         <section class="calculator-screen">
-          <div class="calculator-numbers">
-
+          <div class="calculator-numbers" data-current-calculation="0">
+            0
           </div>
         </section>
     
         <section class="calculator-buttons"> <!--Will be the buttons of the calculator-->
-            <button class="calculator-button top-row-button">&lArr;</button>
-            <button class="calculator-button top-row-button">AC</button>
+            <button class="calculator-button top-row-button backspace-button">&lArr;</button>
+            <button class="calculator-button top-row-button clear-button" data-value="AC" data-clicked="0">AC</button>
             <button class="calculator-button top-row-button">&percnt;</button>
             <button class="calculator-button operation-button" data-value="&divide;">&divide;</button>
             <button class="calculator-button number-button" data-value="7">7</button>
