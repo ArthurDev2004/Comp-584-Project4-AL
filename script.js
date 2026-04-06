@@ -23,11 +23,14 @@
  function infixToPostFix(infixExpression)
 {
     let stack = []; // will be a stack for the algorithm 
-    let postfixExpression = ""; 
+    let postfixExpression = []; 
+
+
+    let infixArray = infixExpression.split(/([×|÷|\+|−])/); // will create an array with the numbers and the operators being split (to handle multi digit numbers)
 
     // go through the string with the expression
 
-    for (const character of infixExpression){
+    for (const character of infixArray){
 
         if ( isOperator(character) === true){ // means is an operator, should be pushed onto the stack 
 
@@ -36,7 +39,7 @@
             if ( operatorPrecedence(stack[stack.length-1]) >=  operatorPrecedence(character)){ // pop out the operators from the stack, then push this new operator onto it 
 
                 for (const operator of stack){
-                    postfixExpression += stack.pop(); // appends the popped operators to the postfix notation
+                    postfixExpression.push(stack.pop()); // appends the popped operators to the postfix notation
                 }
 
                 // push this new operator to stack 
@@ -47,15 +50,15 @@
             }
         }
         else {
-            postfixExpression += character; // appends the character and will always create a new string since strings are immutable
+            postfixExpression.push(character); // appends the character and will always create a new string since strings are immutable
         }
 
     }
 
     // empty out the rest of the stack operators 
 
-    for (const operator of stack){
-        postfixExpression += operator; 
+    for (i = stack.length-1; i >= 0; i--){
+        postfixExpression.push(stack[i]); // handles in a lifo (top down manner) to emulate a stack 
     }
 
     return postfixExpression; // returns the converted infix to postfix expression
@@ -242,3 +245,9 @@ document.addEventListener('click', async (e) => {
 
 }); 
 
+
+// need to fix issue with multiple digit numbers and it not showing some stuff correct (9*9+9)
+// (10 * 10)
+// and building addititon on each other
+
+// 100 + 63*2
