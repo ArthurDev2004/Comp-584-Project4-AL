@@ -75,8 +75,8 @@
         }
         else if ( isOperator(character) === true){ // is an operator so need to do the calculation
             
-            let operand2 = stack.pop();
-            let operand1 = stack.pop(); // the first operand will be the one lower in the stack (important for stuff like division and substraction)
+            let operand2 = Number(stack.pop()); // converts to a number so proper calculations are done 
+            let operand1 = Number(stack.pop()); // the first operand will be the one lower in the stack (important for stuff like division and substraction)
             let preliminaryResult; 
 
             // get the operation type and do the proper operation
@@ -101,7 +101,7 @@
 
     result = stack.pop(); // the last value in the stack after going through entire expression is the value of the expression
 
-    return result;
+    return +result.toFixed(1); // will limit result to two decimal places and will do by string, then the unary plus operator will convert it to a number again
 }
 
 
