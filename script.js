@@ -65,7 +65,7 @@ document.addEventListener('click', async (e) => {
             calculatorView.currentCalculation = "0";
 
             // change the clear button to proper state with the data value attribute and the proper display of the html element
-            let clearButton = document.querySelector('#clear-button');
+            let clearButton = document.querySelector('.clear-button');
             clearButton.innerText = 'AC';
             clearButton.dataset.value = 'AC';
         }
@@ -75,7 +75,7 @@ document.addEventListener('click', async (e) => {
     {
         // check to see if the clear button has been clicked already once or not 
         let calculatorView = document.querySelector('.calculator-numbers'); // gets the element that has the calculator numbers
-
+        debugger;
         if (buttonClicked.dataset.clicked === "0") // has not been clicked already this calculation session
         {
             // should first get rid of the numbers till then next operator or if no operator get rid of the current numbers present in the calculator view  
@@ -119,3 +119,109 @@ document.addEventListener('click', async (e) => {
     }
 
 }); 
+
+// returns boolean value if the character is an operand or an operator
+async function isOperator(character){
+
+    if (character === '×' || character === '÷' || character === '+'|| character === '−')
+        return true;
+    else 
+        return false;
+
+}
+
+// determines the precdence of the operator based on PEMDAS
+async function operatorPrecedence(operator){
+
+    if (operator === '×' || operator === '÷')
+        return 2;
+    else if (operator === '+' || operator === '−')
+        return 1;
+
+}
+
+
+// function will convert the infix notation input from the calculator to the postfix notation to easily calculate using a stack 
+async function infixToPostFix(infixExpression)
+{
+    let stack = []; // will be a stack for the algorithm 
+    let postfixExpression = ""; 
+
+    // go through the string with the expression
+
+    for (const character of infixExpression){
+
+        if (isOperator(character) === true){ // means is an operator, should be pushed onto the stack 
+
+            // determine if the operator currently in the infix notation has higher or equal precdence to the operator at the top of the stack 
+
+            if (operatorPrecedence(stack[stack.length-1]) >= operatorPrecedence(character)){ // pop out the operators from the stack, then push this new operator onto it 
+
+                for (const operator of stack){
+                    postfixExpression += stack.pop(); // appends the popped operators to the postfix notation
+                }
+
+                // push this new operator to stack 
+                stack.push(character); 
+            }
+            else{
+                stack.push(character); 
+            }
+        }
+        else {
+            postfixExpression += character; // appends the character and will always create a new string since strings are immutable
+        }
+
+    }
+
+    // empty out the rest of the stack operators 
+
+    for (const operator of stack){
+        postfixExpression += operator; 
+    }
+
+    return postfixExpression; // returns the converted infix to postfix expression
+
+}
+
+// will evaluate the postfix expression and return a result to the calculator view 
+async function evaluatePostfixExpression(postfixExpression){
+
+    let stack = []; // stack will be used for evaluation of the expression
+    let result; // represents final calculation result 
+
+    for (const character in postfixExpression){
+
+        if (isOperator(character) === false){ // regular operand and can push to stack 
+            stack.push(character);
+        }
+        else if (isOperator(character) === true){ // is an operator so need to do the calculation
+            
+            let operand2 = stack.pop();
+            let operand1 = stack.pop(); // the first operand will be the one lower in the stack (important for stuff like division and substraction)
+            let preliminaryResult; 
+
+            // get the operation type and do the proper operation
+            if (character === '×'){
+                preliminaryResult = operand1 * operand2;
+            }
+            else if (character === '÷'){
+                preliminaryResult = operand1 / operand2;
+            }
+            else if (character === '+'){
+                preliminaryResult = operand1 + operand2;
+            }
+            else if (character === '−'){
+                preliminaryResult = operand1 - operand2;
+            }
+
+            stack.push(preliminaryResult); // push the result of this preliminary operation to the stack so it can be used in other calculations 
+
+        }
+
+    }
+
+    result = stack.pop(); // the last value in the stack after going through entire expression is the value of the expression
+
+    return result;
+}
