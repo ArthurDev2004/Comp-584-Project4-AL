@@ -165,6 +165,8 @@ document.addEventListener('click', async (e) => {
     }
     else if (buttonClicked.classList.contains('backspace-button')){ // will know if it is the delete button which has been pressed (backspace button)
 
+        debugger;
+
         let calculatorView = document.querySelector('.calculator-numbers'); // gets the element that has the calculator numbers
 
         calculatorView.innerText = calculatorView.innerText.slice(0,-1); // will get rid of the last character that was inputted
@@ -174,7 +176,7 @@ document.addEventListener('click', async (e) => {
         {
             // reverts the calculator inner state and inner text of the element to their defaults
             calculatorView.innerText = "0";
-            calculatorView.currentCalculation = "0";
+            calculatorView.dataset.currentCalculation = "0";
 
             // change the clear button to proper state with the data value attribute and the proper display of the html element
             let clearButton = document.querySelector('.clear-button');
@@ -187,7 +189,7 @@ document.addEventListener('click', async (e) => {
     {
         // check to see if the clear button has been clicked already once or not 
         let calculatorView = document.querySelector('.calculator-numbers'); // gets the element that has the calculator numbers
-        debugger;
+
         if (buttonClicked.dataset.clicked === "0") // has not been clicked already this calculation session
         {
             // should first get rid of the numbers till then next operator or if no operator get rid of the current numbers present in the calculator view  
@@ -229,7 +231,6 @@ document.addEventListener('click', async (e) => {
     }else if (buttonClicked.classList.contains('equal-button')){ // whenver the user puts in there input to get the result calculated from the expresion they had 
 
         // get the expression from the calculator view 
-        debugger;
         let calculatorView = document.querySelector('.calculator-numbers'); // gets the element that has the calculator numbers
 
         let infixExpression = calculatorView.innerText; 
@@ -250,4 +251,5 @@ document.addEventListener('click', async (e) => {
 // (10 * 10)
 // and building addititon on each other
 
-// 100 + 63*2
+// Handle divide by 0 case
+// 0 being added to front 
