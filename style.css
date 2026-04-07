@@ -8,10 +8,14 @@ body {
   padding: 0;
   margin: 0;
 }
+
+/*Determines the whole width of the calculator*/
 .wrapper {
     width: 400px;
 }
 
+
+/*Represents the grid used to make calculator layout */
 .calculator-buttons{
     display: grid; /*makes a grid with the buttons*/
     grid-template-columns: repeat(4, 1fr); /*4 columns all of equal width*/
@@ -23,7 +27,7 @@ body {
     padding: 10px;
 }
 
-
+/*Represents the shape of all the calculator buttons*/
 .calculator-button{
     border-radius: 50%;
     background-color: #232323;
@@ -35,38 +39,51 @@ body {
     text-align: center;
 }
 
+/*Adds an inner shadow whenever the button is in an activte state (getting clicked on) to make it look like a button being pressed down*/
+.calculator-button:active{
+     box-shadow: inset -5px 3px 2px rgba(0, 0, 0, 0.3)
+}
+
+/*Represents state of hover for the default calculator buttons*/
 .calculator-button:hover{
     color: #232323;
     background-color: white;
 }
 
+/*Reprents the buttons for the operators on the calculator*/
 .operation-button{
     background-color: #fe9808;
 }
 
+/*Repreents button for operators during a hover state*/
 .operation-button:hover{
     background-color: white;
     color: #fe9808;
 }
 
+/*Represents css class for equal button on calculator*/
 .equal-button{
     background-color: #fe9808;
 }
 
+/*Represents css class for equal button on calculator during a hover state*/
 .equal-button:hover{
     background-color: white;
     color: #fe9808;
 }
 
+/*Represents css class for top row buttons for clear and backspace*/
 .top-row-button{
     background-color: #555555;
 }
 
+/*Represents top row buttons during a state of hover*/
 .top-row-button:hover{
     color: #555555;
     background-color: white;
 }
 
+/*Reprents the calculator screen where the numbers are displayed*/
 .calculator-numbers{
     background-color: black;
     max-width: 100%;
@@ -74,8 +91,8 @@ body {
     height: 100px;
     color: white;
     text-align: right;
-    letter-spacing: 0.25rem;
-    font-size: 4rem;
+    letter-spacing: 0.25rem; /*Used to make spacing between more like actual calculator, works since letters in flexbox div are not fully like flex items*/
+    font-size: 4rem; /*Adjusts font size to make it look like calculator*/
     overflow-x: auto;
     display: flex; /*Will allow for easily making the text in the center*/
     justify-content: right;
@@ -83,11 +100,12 @@ body {
     white-space: nowrap; /*Will ensure the element can overflow so the scrolling appears*/
 }
 
-/*Gets rid of noticable scroll bar horizontally whenever on chrome*/
+/*Gets rid of noticable scroll bar horizontally whenever on Chrome*/
 .calculator-numbers::-webkit-scrollbar{
     display: none;
 }
 
+/*Represents button that repersents value 0 on calculator, which takes up multiple columns in the CSS grid of the calculator*/
 #zero-button{
     grid-column-start: 1;
     grid-column-end: 4;
@@ -96,7 +114,7 @@ body {
     border-radius: 300px;
 }
 
-
+/*Represents button that represents the clear button on calculator, takes up multiple columns in calculator CSS grid*/
 .clear-button{
     grid-column-start: 2;
     grid-column-end: 4;

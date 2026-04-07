@@ -246,10 +246,3 @@ document.addEventListener('click', async (e) => {
 
 }); 
 
-
-// need to fix issue with multiple digit numbers and it not showing some stuff correct (9*9+9)
-// (10 * 10)
-// and building addititon on each other
-
-// Handle divide by 0 case
-// 0 being added to front 
